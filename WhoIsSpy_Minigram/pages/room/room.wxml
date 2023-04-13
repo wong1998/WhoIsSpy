@@ -1,0 +1,102 @@
+<!-- 房间网格 -->
+<view class="grid">
+    <view class="grid-item" wx:for="{{playerList}}" wx:key="playerNumber">
+        <image src="{{item.avatarUrl}}" mode="aspectFit" />
+        <view>{{item.nickName}}</view>
+        <block wx:if="{{status=='create' || status=='end'}}">
+            <view class='ready_state' wx:if="{{item.ready}}">已准备</view>
+            <view class='no_ready_state' wx:else>未准备</view>
+        </block>
+
+        <view class="host-text" wx:if="{{item.isOwner}}">房主</view>
+        <block wx:if="{{status=='state'|| status=='vote'|| status=='end'}}">
+            <view wx:if="{{item.isOut}}">已出局</view>
+
+        </block>
+        <!-- 序号 -->
+        <view class='player-number'>
+            <text>{{item.number}}</text>
+        </view>
+        <!-- 只有投票状态的时候才会显示 -->
+        <view wx:if="{{status=='vote' && item.userId != userInfo.userId}}">
+            <view class="vote-button" wx:if="{{!item.isVote}}" catchtap="handleVote" data-uservotedid="{{item.userId}}">
+                <text>投票</text>
+            </view>
+            <view wx:else class="vote-over-button">
+                <text>已投票</text>
+            </view>
+
+        </view>
+
+
+
+    </view>
+
+
+</view>
+
+<!-- 提示词 -->
+<!-- 在游戏开始后的所有阶段都可以看到，后面考虑开发隐藏和显示功能 -->
+<view class='word-text' wx:if="{{status=='start'|| status=='state'|| status=='vote'|| status=='result'}}">
+    <text>你的提示词是：{{word}}\n</text>
+</view>
+<!-- 倒计时或者其他提示 -->
+<block>
+    <view class='word-text' wx:if="{{status=='start'}}">
+        {{countDownTime}}秒后开始每人轮流发言
+    </view>
+    <view class='word-text' wx:if="{{status=='state'}}">
+        现在进入发言阶段，按照号码顺序依次发言，现在请{{stateNumber}}号开始发言!
+    </view>
+    <view class='word-text' wx:if="{{status=='end'}}">
+        游戏结束!
+    </view>
+
+    <view wx:if="{{status=='create' || status=='end'}}">
+        <!-- 人数先不实现 -->
+        <!-- <view class='word-text'>
+        <text>房间所需人数为4人，还差0人</text>
+    </view> -->
+        <view class='word-text'>
+            <text>所有人准备后房主可以开始游戏</text>
+        </view>
+        <button wx:if="{{accountReady}}" class="prepare_button" type="primary" plain="true" bindtap='handleAccountReady'>取消准备</button>
+        <button wx:else class="prepare-button" type="primary" plain="true" bindtap='handleAccountReady'>准备</button>
+        <!-- 使用vant组件 -->
+        <!-- <van-button class="prepare-button" type="primary">开始游戏</van-button> -->
+
+        <button class="prepare-button" type="primary" plain="true" bindtap='handleStartGame'>开始游戏</button>
+
+        <button class="prepare-button" type="primary" plain="true" bindtap='handleQuitRoom'>退出房间</button>
+
+    </view>
+    <view class='word-text' wx:if="{{status=='vote'}}">
+        进入了投票阶段，请投票，倒计时{{countDownTime}}秒
+    </view>
+</block>
+
+<!-- 陈述版 -->
+<block>
+    <view class='statement-list' wx:if="{{status=='state' || status=='vote'}}">
+        <view wx:for="{{statementList}}" wx:key="playerNumber">
+            <text>{{item.playerNumber}}号{{item.nickName}}说:{{item.statement}}。</text>
+        </view>
+        <view>
+
+        </view>
+    </view>
+    <view wx:if="{{status=='state'  && (stateNumber == accountNumber)}}">
+        <input class='state-input' type="text" maxlength="20" bindinput='handleStateInput' placeholder="最大输入长度为20个字" />
+        <button class='state-button' type='submit' bindtap='submitStatement'>提交发言</button>
+    </view>
+</block>
+
+<!-- 投票结果展示 -->
+<view class="modalDlg" wx:if="{{status=='result'}}">
+    <view class='result-text'>
+        <text>游戏结束，卧底是July，卧底词是西红柿，普通词是胡萝卜</text>
+    </view>
+    <button class='result-button' bindtap="closeResultDlg">确定</button>
+
+</view>
+<view class="mask" catchtouchmove="preventTouchMove" wx:if="{{status=='result'}}"></view>

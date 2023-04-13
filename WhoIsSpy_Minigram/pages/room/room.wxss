@@ -1,0 +1,237 @@
+/* pages/room/room.wxss */
+/* .prepare_button{
+    display: flex;
+
+
+} */
+
+/* .button {
+    margin-top: 30rpx;
+    margin-bottom: 30rpx;
+} */
+/* .button .vote-button{
+
+} */
+.mask {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #000;
+    z-index: 9000;
+    opacity: 0.3;
+}
+
+.modalDlg {
+    width: 580rpx;
+    height: 550rpx;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    z-index: 9999;
+    margin: -370rpx 85rpx;
+    background-color: #fff;
+    border-radius: 36rpx;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.result-text{
+    margin: 30rpx;
+    width: 400rpx;
+    height: 340rpx;
+    border: 1px solid rgb(201, 206, 202);
+
+}
+.result-button{
+    position: absolute;
+    bottom: 80rpx;
+    color: #fff;
+    width: 270rpx;
+    height: 80rpx;
+    line-height: 50rpx;
+    background: #d95155;
+    text-align: center;
+    border-radius: 12rpx;
+    margin-top: 60rpx;
+    font-size: 35rpx;
+    text-indent: 0em;
+}
+
+
+.state-input {
+    width: 100%;
+    height: 70rpx;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgb(141, 228, 177);
+    border-radius: 25px;
+}
+.state-button{
+    width: 70px;
+    height: 40px;
+}
+
+.vote-button {
+
+    display: flex;
+    width: 100rpx;
+    height: 40rpx;
+    font-size: 25rpx;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(50, 196, 69);
+
+}
+
+.vote-over-button {
+    /* position: absolute;
+    bottom: 0rpx;
+    left:42rpx; */
+    display: flex;
+    width: 100rpx;
+    height: 40rpx;
+    font-size: 25rpx;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(128, 132, 133);
+
+}
+
+.word-text {
+
+    text-align: center;
+
+}
+
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 400rpx;
+    /* border-top: 1px solid #eee; */
+    border: 1px solid rgb(214, 206, 206);
+}
+
+.grid .grid-item {
+    position: relative;
+    padding: 10rpx;
+    width: 25%;
+    height: 200rpx;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    font-size: 30rpx;
+    flex-direction: column;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid .grid-item .host-text {
+    position: absolute;
+    padding: 0rpx;
+    width: 25%;
+    height: 100rpx;
+    left: 0rpx;
+    top: 0rpx;
+    box-sizing: border-box;
+    border: 1px solid rgb(15, 216, 92);
+    font-size: 30rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid .grid-item .player-number {
+    position: absolute;
+    padding: 0rpx;
+    width: 35rpx;
+    height: 35rpx;
+    left: 0rpx;
+    bottom: 0rpx;
+    box-sizing: border-box;
+    border-radius: 60%;
+    border: 1px solid rgb(233, 200, 93);
+    font-size: 30rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid .grid-item .no_ready_state {
+    position: absolute;
+    padding: 0rpx;
+    width: 25%;
+    height: 120rpx;
+    right: 0rpx;
+    top: 0rpx;
+    box-sizing: border-box;
+    border: 1px solid rgb(10, 184, 77);
+    font-size: 30rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid .grid-item .ready_state {
+    position: absolute;
+    padding: 0rpx;
+    width: 25%;
+    height: 120rpx;
+    right: 0rpx;
+    top: 0rpx;
+    box-sizing: border-box;
+    border: 1px solid rgb(189, 202, 194);
+    font-size: 30rpx;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .grid .grid-item:nth-of-type(3n) {
+    border-right: none; */
+/* } */
+.statement-list {
+    padding-top: 60rpx;
+    width: 100%;
+    height: 300rpx;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgb(214, 206, 206);
+}
+
+
+.grid .grid-item image {
+    margin: 0 auto;
+    width: 60rpx;
+    height: 60rpx;
+}
+
+.grid .grid-item .tag {
+    font-size: 20rpx;
+    border-radius: 30rpx;
+    padding: 2rpx 10rpx;
+    min-width: 30rpx;
+    max-width: 40rpx;
+    /*单行省略号*/
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 30rpx;
+    color: white;
+    background: red;
+    position: absolute;
+    margin: auto;
+    top: 20rpx;
+    right: 20rpx;
+}

@@ -1,0 +1,37 @@
+<!--pages/home/home.wxml-->
+<view class="container">
+
+    <image src='/image/title.png' mode="widthFix" />
+    <view class="userinfo">
+        <block wx:if="{{!hasUserInfo}}">
+            <button wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile" type="primary"> 请先登录 </button>
+            <button wx:else open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 请先登录 </button>
+        </block>
+        <block wx:else>
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.userProperty.avatarUrl}}" mode="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.userProperty.nickName}}</text>
+        </block>
+    </view>
+
+    <button type="primary" plain="true" bindtap='handleShowCreateRoomDlg'>创建房间</button>
+    <button type="primary" plain="true" bindtap='handleShowJoinRoomDlg'>加入房间</button>
+    <button type="primary" plain="true" bindtap='handleShowRule'>游戏规则</button>
+
+    <view class="modalDlg" wx:if="{{showCreateRoomDlg}}">
+        <input class='room_input' type='number' placeholder='房间人数' maxlength="2" bindinput='handleRoomPlayerNum'></input>
+        <button class='dlg_button' type='submit' bindtap="gotoCreateRoom">创建房间</button>
+        <button class='dlg_button' bindtap="closeCreateRoomDlg">取消</button>
+
+
+    </view>
+    <view class="modalDlg" wx:if="{{showJoinRoomDlg}}">
+        <input class='room_input' type='number' placeholder='房间号码' maxlength="4" bindinput='handleJoinRoom'></input>
+        <button class='dlg_button' type='submit' bindtap="gotoJoinRoom">加入房间</button>
+        <button class='dlg_button' bindtap="closeJoinRoomDlg">取消</button>
+
+    </view>
+
+    <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{showMask}}"></view>
+
+
+</view>
